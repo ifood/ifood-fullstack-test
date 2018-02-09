@@ -8,8 +8,10 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <AppBar title="Title"/>
+        <AppBar title="Ifood App Maneiro"/>
+        <br/>
         <Search />
+        <br/>
         <OrderList />
       </MuiThemeProvider>
     );
