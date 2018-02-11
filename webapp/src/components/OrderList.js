@@ -1,67 +1,81 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'react-grid-system';
+import { connect } from 'react-redux'
+import { Container } from 'react-grid-system';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
-import {Card, CardActions} from 'material-ui/Card';
+import {Card } from 'material-ui/Card';
+import { fetchOrders } from '../actions/orderActions'
+
+const mapStateToProps = (state) => {
+  return {
+    filters: state.filter,
+    orders: state.order.orders
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchOrders: (filters) => {
+      dispatch(fetchOrders(filters))
+    }
+  }
+}
 
 class OrderList extends Component {
-  constructor(props) {
-    super(props);
 
-    const minDate = new Date();
-    const maxDate = new Date();
-    minDate.setFullYear(minDate.getFullYear() - 1);
-    minDate.setHours(0, 0, 0, 0);
-    maxDate.setFullYear(maxDate.getFullYear() + 1);
-    maxDate.setHours(0, 0, 0, 0);
+  constructor(props) {
+    super(props)
 
     this.state = {
-      selected: [1],
-    };
+      fixedHeader: true,
+      fixedFooter: true,
+      stripedRows: false,
+      showRowHover: false,
+      selectable: true,
+      multiSelectable: false,
+      enableSelectAll: false,
+      deselectOnClickaway: true,
+      showCheckboxes: false,
+      height: '300px',
+    }
+
   }
 
- isSelected = (index) => {
-   return this.state.selected.indexOf(index) !== -1;
- };
+  componentDidMount() {
+    console.log("fetching...")
+    this.props.fetchOrders(this.props.filters)
+  }
 
- handleRowSelection = (selectedRows) => {
-   this.setState({
-     selected: selectedRows,
-   });
- };
+  componentWillReceiveProps(nextProps) {
+    console.log("will receive props...", nextProps)
+  }
+  renderOrders () {
+    console.log("renderOrders()...", this.props.orders)
+    return this.props.orders.map( (order, i) => {
+      console.log("...singleOrder()", order)
+      return (<TableRow key={i}>
+                  <TableRowColumn>Teste</TableRowColumn>
+                  <TableRowColumn>John Smith</TableRowColumn>
+                  <TableRowColumn>Employed</TableRowColumn>
+              </TableRow>)
+    }
+  )
+  }
 
   render() {
+    console.log("render().")
     return (
       <Card>
       <Container>
-      <Table onRowSelection={this.handleRowSelection}>
-        <TableHeader>
+      <Table>
+        <TableHeader displaySelectAll={this.state.showCheckboxes} adjustForCheckbox={this.state.showCheckboxes}>
           <TableRow>
             <TableHeaderColumn>ID</TableHeaderColumn>
             <TableHeaderColumn>Name</TableHeaderColumn>
             <TableHeaderColumn>Status</TableHeaderColumn>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          <TableRow selected={this.isSelected(0)}>
-            <TableRowColumn>1</TableRowColumn>
-            <TableRowColumn>John Smith</TableRowColumn>
-            <TableRowColumn>Employed</TableRowColumn>
-          </TableRow>
-          <TableRow selected={this.isSelected(1)}>
-            <TableRowColumn>2</TableRowColumn>
-            <TableRowColumn>Randal White</TableRowColumn>
-            <TableRowColumn>Unemployed</TableRowColumn>
-          </TableRow>
-          <TableRow selected={this.isSelected(2)}>
-            <TableRowColumn>3</TableRowColumn>
-            <TableRowColumn>Stephanie Sanders</TableRowColumn>
-            <TableRowColumn>Employed</TableRowColumn>
-          </TableRow>
-          <TableRow selected={this.isSelected(3)}>
-            <TableRowColumn>4</TableRowColumn>
-            <TableRowColumn>Steve Brown</TableRowColumn>
-            <TableRowColumn>Employed</TableRowColumn>
-          </TableRow>
+        <TableBody displayRowCheckbox={this.state.showCheckboxes} deselectOnClickaway={this.state.deselectOnClickaway} showRowHover={this.state.showRowHover} stripedRows={this.state.stripedRows}>
+          { this.renderOrders() }
         </TableBody>
       </Table>
       </Container>
@@ -70,4 +84,4 @@ class OrderList extends Component {
   }
 }
 
-export default OrderList;
+export default connect(mapStateToProps, mapDispatchToProps)(OrderList)
