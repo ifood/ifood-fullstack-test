@@ -18,4 +18,6 @@ public interface OrderRepository extends CrudRepository<Order, UUID> {
 	
 	@RestResource(path = "byDate")
 	Collection<Order> findByCreatedAtBetween(@Param("start") Date start, @Param("end") Date end);
+
+
 }

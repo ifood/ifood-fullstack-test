@@ -11,15 +11,15 @@ import { fetchOrders } from '../actions/orderActions'
 
 const mapStateToProps = (state) => {
   return {
-    filters: state.filter
+    filters: state.filter.filters
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setFilters: (filters) => {
-      dispatch(setFilters(filters))
-      dispatch(fetchOrders(filters))
+        dispatch(fetchOrders(filters))
+        dispatch(setFilters(filters))
     }
   }
 }
