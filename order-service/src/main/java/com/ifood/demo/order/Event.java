@@ -1,4 +1,4 @@
-package com.ifood.demo.client;
+package com.ifood.demo.order;
 
 import lombok.Data;
 import lombok.Value;

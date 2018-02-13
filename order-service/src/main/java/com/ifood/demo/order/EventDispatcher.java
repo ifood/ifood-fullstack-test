@@ -1,13 +1,13 @@
-package com.ifood.demo.client;
-
-import java.util.concurrent.TimeUnit;
+package com.ifood.demo.order;
 
 import com.google.gson.Gson;
-import com.ifood.demo.ClientApplication;
+import com.ifood.demo.OrderApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
@@ -33,7 +33,7 @@ public class EventDispatcher {
 
         log.info("dispatching event to mq....");
 
-        rabbitTemplate.convertAndSend(ClientApplication.queueName, eventPayload);
+        rabbitTemplate.convertAndSend(OrderApplication.queueName, eventPayload);
 
         receiver.getLatch().await(10000, TimeUnit.MILLISECONDS);
 

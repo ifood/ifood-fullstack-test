@@ -1,8 +1,8 @@
-package com.ifood.demo.client;
-
-import java.util.concurrent.CountDownLatch;
+package com.ifood.demo.order;
 
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.CountDownLatch;
 
 @Component
 public class Receiver {
