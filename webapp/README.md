@@ -1,9 +1,6 @@
 # Desafio IFOOD
 ## Author: Caique Xavier.
 
-
-Stack escolhido e adicionado à solução.
-
 ## Stack FrontEnd
 * reactjs: https://reactjs.org/.
 * starter: https://github.com/facebook/create-react-app.
