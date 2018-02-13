@@ -1,10 +1,11 @@
+// Core
 import { applyMiddleware, createStore, combineReducers } from 'redux'
 import { createLogger }   from 'redux-logger'
 import { orderReducer } from './reducers/orderReducer'
 import { filterReducer } from './reducers/filterReducer'
 import thunk from 'redux-thunk'
 
-const middleware = applyMiddleware( thunk)
+const middleware = applyMiddleware( createLogger(), thunk)
 
 export default createStore(
   combineReducers({

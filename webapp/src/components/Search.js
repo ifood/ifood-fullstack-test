@@ -1,11 +1,14 @@
+// Core
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+// Ui Ux
 import { Container, Row, Col } from 'react-grid-system'
 import {Card, CardActions} from 'material-ui/Card'
 import TextField from 'material-ui/TextField'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentSearch from 'material-ui/svg-icons/action/search'
 import DatePicker from 'material-ui/DatePicker'
+// Actions
 import { setFilters } from '../actions/filterActions'
 import { fetchOrders } from '../actions/orderActions'
 
@@ -24,7 +27,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-class Search extends Component {
+export class Search extends Component {
 
   constructor(props) {
     super(props)
@@ -69,7 +72,7 @@ class Search extends Component {
         <DatePicker
             onChange={this.handleChangeMinDate}
             floatingLabelText="Min Date"
-            defaultDate={this.props.filters.minDate}
+            defaultDate={ new Date(this.props.filters.minDate) }
           />
         </Col>
 
@@ -77,7 +80,7 @@ class Search extends Component {
         <DatePicker
             onChange={this.handleChangeMaxDate}
             floatingLabelText="Max Date"
-            defaultDate={this.props.filters.maxDate}
+            defaultDate={ new Date(this.props.filters.maxDate) }
           />
         </Col>
 

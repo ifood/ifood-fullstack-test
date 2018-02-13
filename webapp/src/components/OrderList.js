@@ -1,17 +1,28 @@
-import React, { Component } from 'react';
+// start: Imports
+// Core
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Container } from 'react-grid-system';
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
-import {Card } from 'material-ui/Card';
+// Ui Ux
+import { Container } from 'react-grid-system'
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
+import {Card } from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
+import Dialog from 'material-ui/Dialog'
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+import Snackbar from 'material-ui/Snackbar';
+// Formatters
+import moment from 'moment';
+import numeral from 'numeral'
+// Actions
 import { fetchOrders, fetchCompleted } from '../actions/orderActions'
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+// -- end: Imports
 
 const mapStateToProps = (state) => {
   return {
     filters: state.filter.filters,
     orders: state.order.orders,
-    status: state.order.status
+    status: state.order.status,
+    error: state.order.error
   }
 }
 
@@ -30,6 +41,7 @@ class OrderList extends Component {
 
   constructor(props) {
     super(props)
+    moment.locale('br');
 
     this.state = {
       fixedHeader: true,
@@ -63,7 +75,7 @@ class OrderList extends Component {
   }
 
   handleRowSelection = (selectedRows) => {
-    if (selectedRows.length == 0) {
+    if (selectedRows.length === 0) {
       selectedRows = [0]
     }
 
@@ -120,7 +132,7 @@ class OrderList extends Component {
   }
 
   renderDetailItems () {
-    
+
     let itemsList = this.state.orderDetails.items
 
     if (itemsList) {
@@ -128,8 +140,8 @@ class OrderList extends Component {
         return (<TableRow key={i} selected={this.isSelected(i)}>
                     <TableRowColumn> { item.description } </TableRowColumn>
                     <TableRowColumn> { item.quantity } </TableRowColumn>
-                    <TableRowColumn> { item.price } </TableRowColumn>
-                    <TableRowColumn> { item.price *  item.quantity} </TableRowColumn>
+                    <TableRowColumn> { numeral(item.price).format('$0,0.00') } </TableRowColumn>
+                    <TableRowColumn> { numeral(item.price *  item.quantity).format('$0,0.00') } </TableRowColumn>
                 </TableRow>)
       }
     )} else {
@@ -147,21 +159,38 @@ class OrderList extends Component {
     if (ordersList.length > 0) {
       return ordersList.map( (order, i) => {
         return (<TableRow key={i} selected={this.isSelected(i)}>
-                    <TableRowColumn> { order.createdAt } </TableRowColumn>
+                    <TableRowColumn> { moment(order.createdAt).format('DD/MM/YYYY') } </TableRowColumn>
                     <TableRowColumn> { order.clientName } </TableRowColumn>
                     <TableRowColumn> { order.clientPhone } </TableRowColumn>
                     <TableRowColumn> { order.clientEmail } </TableRowColumn>
-                    <TableRowColumn> { order.total } </TableRowColumn>
+                    <TableRowColumn> { numeral(order.total).format('$0,0.00') } </TableRowColumn>
                 </TableRow>)
       }
     )} else {
       return (<TableRow>
-                  <TableRowColumn></TableRowColumn>
-                  <TableRowColumn><h4>No data found!</h4></TableRowColumn>
-                  <TableRowColumn></TableRowColumn>
-                  <TableRowColumn></TableRowColumn>
-                  <TableRowColumn></TableRowColumn>
+                <TableRowColumn> </TableRowColumn>
+                <TableRowColumn> </TableRowColumn>
+                <TableRowColumn> { this.renderLoading() }
+                </TableRowColumn>
+                  <TableRowColumn> </TableRowColumn>
+                  <TableRowColumn> </TableRowColumn>
               </TableRow>)
+    }
+  }
+
+  renderLoading() {
+
+    const style = {
+        refresh: {
+          display: 'inline-block',
+          position: 'relative',
+        }
+    }
+
+    if (this.props.status === "loading") {
+      return (<RefreshIndicator size={40} left={10} top={0} style={style.refresh} status="loading" />)
+    } else {
+      return (<h5>No Data found!</h5>)
     }
 
   }
@@ -170,6 +199,11 @@ class OrderList extends Component {
     return (
       <Card>
       <Container>
+      <Snackbar
+        open={ (this.props.error !== "") }
+        message= { ((this.props.error) ? this.props.error : "Im confused") }
+        autoHideDuration={4000}
+      />
       { this.renderDetailsDialog() }
       <Table onRowSelection={this.handleRowSelection}>
         <TableHeader displaySelectAll={this.state.showCheckboxes} selectable = {this.state.selectable} adjustForCheckbox={this.state.showCheckboxes}>
@@ -182,16 +216,11 @@ class OrderList extends Component {
           </TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={this.state.showCheckboxes} deselectOnClickaway={this.state.deselectOnClickaway} showRowHover={this.state.showRowHover} stripedRows={this.state.stripedRows}>
-
             { this.renderOrders() }
-
-
         </TableBody>
       </Table>
-      <h5> { this.props.status }</h5>
       </Container>
       </Card>
-
     );
   }
 }

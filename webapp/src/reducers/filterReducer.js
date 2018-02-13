@@ -1,7 +1,7 @@
 const initialState = {
   filters: {
-    minDate: new Date(2018, 0, 1, 0, 0, 0, 0),
-    maxDate: new Date(2018, 1, 1, 0, 0, 0, 0),
+    minDate: new Date(2018, 0, 1),
+    maxDate: new Date(2018, 1, 1),
     name: "",
     email: "",
     phone: ""

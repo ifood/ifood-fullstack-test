@@ -1,3 +1,4 @@
+// Core
 import axios from 'axios'
 
 const ordersApiUrl = "http://localhost:8082/v1/orders/search/byDate"
@@ -6,7 +7,7 @@ const clientsApiUrl = "http://localhost:8081/v1/clients/search/byCustomQuery/"
 
 export function fetchRequested() {
   let payload = {
-    status: "fetching..."
+    status: "loading"
   }
   return {
     type: "FETCH_ORDERS_REQUESTED",
@@ -15,7 +16,7 @@ export function fetchRequested() {
 }
 export function fetchFullfiled(orders) {
   let payload = {
-    status: "fullfiled...",
+    status: "loading",
     orders: orders
   }
   return {
@@ -32,8 +33,11 @@ export function fetchCompleted() {
     payload: payload
   }
 }
-export function fetchRejected(payload) {
-  payload.status = "rejected..."
+export function fetchRejected(error) {
+  let payload = {
+    status: "err",
+    errorMessage: error
+  }
   return {
     type: "FETCH_ORDERS_REJECTED",
     payload: payload
@@ -66,6 +70,10 @@ export function fetchOrders(filters) {
 function handleOrdersResponse(orders, filters) {
 
   try {
+
+    if (filters.name === "ERROR") {
+      throw "Sorry Dear!, i`ll pay you a coffe while we solve this."
+    }
 
     let resultOrders = []
     orders.forEach( (order) => {

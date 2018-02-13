@@ -1,5 +1,6 @@
 const initialState = {
   status: "ready",
+  error: "",
   orders:[]
 }
 
@@ -15,7 +16,7 @@ export const orderReducer = (state=initialState, action) => {
         state = {...state, status: action.payload.status}
         break
     case "FETCH_ORDERS_REJECTED":
-        state = {...state, status: action.payload.status}
+        state = {...state, status: action.payload.status, error: action.payload.error}
         break
     default:
   }
