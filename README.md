@@ -44,3 +44,27 @@ As this web application will be a worldwide success, it must be prepared to be f
 In other words, each micro-service will constantly reiceive a POST requests 
 (let's say 2/sec for client and 50/sec for order) and your web application will have a lots of users 
 active simultaneously (about ~1k).
+
+## Architecure
+
+![Architecture](./Architecture.png)
+* FrontEnd: ReactJS project ([frontend project](./frontend))
+* API Gateway: Zuul Proxy ([search-apigateway project](./search-apigateway))
+* Service Discovery Server: Eureka Server ([discovery-service project](./discovery-service))
+* Client Microservice: Spring Boot project ([client-service project](./client-service))
+* Order Microservice: Spring Boot project ([order-service project](./order-service))
+* Search Microservice: Spring Boot project ([search-service project](./search-service))
+
+## Pré-requisitos
+
+* RabbitMQ Server
+
+## Instalação
+
+Para todos os projetos Java, basta executar *mvn install*
+
+Para o projeto frontend, executar *npm install* e *npm run start*
+
+## TO DO
+
+* Testes unitários para todos os projetos
