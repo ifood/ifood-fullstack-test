@@ -11,6 +11,10 @@ import com.ifood.demo.client.ClientRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
+
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,13 +30,12 @@ public class ClientApplicationTests {
 		clientRepository.save(new Client("Mary Doe", "mary@doe.com", "12348765"));
 		clientRepository.save(new Client("Billy Bob", "billy@bob.com", "11112345"));
 
+		Integer resultContAll = 0;
 		for (Client client : clientRepository.findAll()) {
-			log.info("Hello {}", client.toString());
+			resultContAll++;
 		}
-		
-		for (Client client : clientRepository.findByNameIgnoreCaseContaining("doe")) {
-			log.info("Hello 'Doe' {}", client.toString());		
-		}
+		assertEquals(resultContAll, new Integer(3));
+
 
 	}
 }

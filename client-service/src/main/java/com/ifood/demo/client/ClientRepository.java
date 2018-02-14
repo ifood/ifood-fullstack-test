@@ -26,6 +26,6 @@ public interface ClientRepository extends CrudRepository<Client, UUID> {
 
     @RestResource(path = "byCustomQuery")
     @Query("select c from Client c where c.id = :id and c.name like %:name% and phone like %:phone% and email like %:email%")
-    List<Client> findByFirstname(@Param("id") UUID id, @Param("name") String name, @Param("phone") String phone, @Param("email") String email);
+    List<Client> findByCustomQueryIgnoreCaseContaining(@Param("id") UUID id, @Param("name") String name, @Param("phone") String phone, @Param("email") String email);
 
 }
