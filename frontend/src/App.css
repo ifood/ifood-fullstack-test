@@ -1,0 +1,25 @@
+body {
+    padding: 20px;
+}
+.react-datepicker-wrapper {
+    width: 100%;
+}
+.react-datepicker__input-container {
+    width: 100%;
+}
+.react-datepicker__input-container input {
+    width: 100%;
+}
+
+.custom-size-modal {
+    width: 80%;
+}
+@media (min-width: 992px) {
+    .custom-size-modal {
+        width: 60%;
+    }
+}
+
+.form-inline .control-label {
+    margin-bottom: 2px !important;
+}

@@ -1,0 +1,22 @@
+server:
+  port: ${PORT:8082}
+
+spring:
+  application:
+    name: order-service
+  data:
+    rest:
+      basePath: /v1
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: ${DISCOVERY_URL:http://localhost:8084}/eureka/

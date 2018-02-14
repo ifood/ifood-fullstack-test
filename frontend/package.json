@@ -1,0 +1,27 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "base-64": "^0.1.0",
+    "moment": "^2.20.1",
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
+    "react-datepicker": "^1.1.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-scripts": "1.1.1",
+    "redux": "^3.7.2",
+    "redux-form": "^7.2.3",
+    "redux-form-saga": "^0.2.0",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^0.16.0",
+    "utf8": "^3.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

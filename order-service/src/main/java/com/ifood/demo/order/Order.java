@@ -20,9 +20,13 @@ public class Order {
 	private final UUID clientId;
 	private final UUID restaurantId;
 	private final Date createdAt;
-	private final Date confirmedAt;	
+	private final Date confirmedAt;
 	private final List<Item> items;
-	
+
+	protected Order(){
+		this(null, null, null, null, null);
+	}
+
 	@Data
 	@RequiredArgsConstructor
 	public static class Item {
@@ -30,5 +34,9 @@ public class Order {
 		private final String description;
 		private final Integer quantity;		
 		private final Double price;
+
+		protected Item(){
+			this(null, null, null);
+		}
 	}
 }

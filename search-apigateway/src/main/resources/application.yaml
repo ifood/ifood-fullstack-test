@@ -1,0 +1,26 @@
+server:
+  port: ${PORT:8085}
+
+spring:
+  application:
+    name: search-apigateway
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: ${DISCOVERY_URL:http://localhost:8084}/eureka/
+
+ribbon:
+  ReadTimeout: 15000
+  ConnectTimeout: 15000
+
+zuul:
+  host:
+    socket-timeout-millis: 15000
+  routes:
+    search-apigateway:
+      service-id: search-service
+      path: /api/**
