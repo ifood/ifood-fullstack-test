@@ -65,6 +65,15 @@ Para todos os projetos Java, basta executar *mvn install*
 
 Para o projeto frontend, executar *npm install* e *npm run start*
 
+Ordem de execução dos projetos:
+
+* discovey-service
+* client-service
+* order-service
+* search-service
+* search-apigateway
+* frontend
+
 ## TO DO
 
 * Testes unitários para todos os projetos
