@@ -1,5 +1,9 @@
 # Desafio IFOOD
-## Author: Caique Xavier.
+## Author: Caique Xavie
+
+## Install guide
+* yarn
+* yarn start
 
 ## Stack FrontEnd
 * reactjs: https://reactjs.org/.
