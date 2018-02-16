@@ -61,7 +61,6 @@ export function fetchOrders(filters) {
 
     })
     .catch( (err) => {
-      // TODO: implementar estado de erro e loading centralizado
       dispatch(fetchRejected(err))
     })
   }
@@ -78,12 +77,14 @@ function handleOrdersResponse(orders, filters) {
     let resultOrders = []
     orders.forEach( (order) => {
 
+      console.log("filters -->", filters)
       let params = {
         id: order.clientId,
         name: (filters.name) ? filters.name : "",
-        phone: (filters.phone) ? filters.name : "",
-        email: (filters.email) ? filters.name : "",
+        phone: (filters.phone) ? filters.phone : "",
+        email: (filters.email) ? filters.email : "",
       }
+      console.log("params -->", params)
       axios.get(clientsApiUrl, {params}).then( (response) => {
 
         let clientsLenght = response.data._embedded.clients.length

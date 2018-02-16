@@ -57,9 +57,9 @@ export class Search extends Component {
       phone: phone,
     })
   }
-  handleChangeMail = (event, mail) => {
+  handleChangeMail = (event, email) => {
     this.setState({
-      mail: mail,
+      email: email,
     })
   }
 
