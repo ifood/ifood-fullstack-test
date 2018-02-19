@@ -201,7 +201,7 @@ class OrderList extends Component {
       <Container>
       <Snackbar
         open={ (this.props.error !== "") }
-        message= { ((this.props.error) ? this.props.error : "Im confused") }
+        message= { ((this.props.error) ? this.props.error : "Error!") }
         autoHideDuration={4000}
       />
       { this.renderDetailsDialog() }

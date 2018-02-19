@@ -71,7 +71,7 @@ function handleOrdersResponse(orders, filters) {
   try {
 
     if (filters.name === "ERROR") {
-      throw "Sorry Dear!, i`ll pay you a coffe while we solve this."
+      throw { error: "Error." }
     }
 
     let resultOrders = []
