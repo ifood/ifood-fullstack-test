@@ -31,11 +31,27 @@ public class ClientApplicationTests {
 		clientRepository.save(new Client("Billy Bob", "billy@bob.com", "11112345"));
 
 		Integer resultContAll = 0;
-		for (Client client : clientRepository.findAll()) {
+        UUID testCaseClientId = null;
+        for (Client client : clientRepository.findAll()) {
 			resultContAll++;
+			System.out.println(client.getName());
+			if (client.getName() ==  "John Doe") {
+			    testCaseClientId = client.getId();
+            }
 		}
 		assertEquals(resultContAll, new Integer(3));
 
+		Integer resultContFindByQuery = 0;
+		for (Client client : clientRepository.findByCustomQueryIgnoreCaseContaining(testCaseClientId, "", "", "john@doe.com")) {
+            resultContFindByQuery++;
+		}
+		assertEquals(resultContFindByQuery, new Integer(1));
+
+        Integer resultContFindByQueryEmpty = 0;
+        for (Client client : clientRepository.findByCustomQueryIgnoreCaseContaining(testCaseClientId, "Nameless", "", "john@doe.com")) {
+            resultContFindByQueryEmpty++;
+        }
+        assertEquals(resultContFindByQueryEmpty, new Integer(0));
 
 	}
 }

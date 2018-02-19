@@ -16,6 +16,8 @@ import com.ifood.demo.order.OrderRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
+import static org.junit.Assert.assertEquals;
+
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -40,9 +42,11 @@ public class OrderApplicationTests {
 						new Item("Item B",2, 2.0))
 				));
 
+		Integer resultContAll = 0;
 		for (Order order : orderRepository.findAll()) {
-			log.info("Found Order {}", order.toString());
+			resultContAll++;
 		}
+		assertEquals(resultContAll, new Integer(2));
 	}
 
 }
