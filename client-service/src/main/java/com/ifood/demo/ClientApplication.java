@@ -1,10 +1,8 @@
 package com.ifood.demo;
 
 import com.google.gson.Gson;
-import com.ifood.demo.client.Event;
+import com.ifood.demo.client.*;
 
-import com.ifood.demo.client.EventDispatcher;
-import com.ifood.demo.client.Receiver;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.TopicExchange;
@@ -22,7 +20,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.ifood.demo.client.ClientEventHandler;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -51,6 +50,15 @@ public class ClientApplication {
             FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
             bean.setOrder(0);
             return bean;
+        }
+    }
+
+    @Configuration
+    public class ExposeEntityIdRestConfiguration extends RepositoryRestConfigurerAdapter {
+
+        @Override
+        public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+            config.exposeIdsFor(Client.class);
         }
     }
 
