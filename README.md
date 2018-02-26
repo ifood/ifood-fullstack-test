@@ -1,5 +1,3 @@
-# iFood Fullstack Test
-
 Create a web application that lists Orders according to some criteria. 
 The web application has only one page (no need for access control).
 
