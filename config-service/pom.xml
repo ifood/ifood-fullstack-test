@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.19.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<groupId>com.ifood</groupId>
+		<artifactId>fullstack-demo</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>com.ifood</groupId>
-	<artifactId>config-service</artifactId>
+
+	<artifactId>fullstack-demo-config-service</artifactId>
+	<name>config-service</name>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
