@@ -2,6 +2,7 @@ package com.ifood.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -18,6 +19,7 @@ import com.ifood.demo.order.OrderEventHandler;
 @EnableSwagger2
 @EnableDiscoveryClient
 @SpringBootApplication
+@EnableFeignClients
 @EnableMongoRepositories("com.ifood.demo")
 public class OrderApplication {
 
