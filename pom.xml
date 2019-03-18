@@ -27,6 +27,7 @@
 		<module>client-service</module>
 		<module>order-service</module>
 		<module>discovery-service</module>
+		<module>config-service</module>
 	</modules>
 
 	<dependencies>
