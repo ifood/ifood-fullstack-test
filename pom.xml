@@ -28,6 +28,8 @@
 		<module>order-service</module>
 		<module>discovery-service</module>
 		<module>config-service</module>
+		<module>gateway-service</module>
+		<module>proxy-service</module>
 	</modules>
 
 	<dependencies>
@@ -97,6 +99,11 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
 
 	</dependencies>
