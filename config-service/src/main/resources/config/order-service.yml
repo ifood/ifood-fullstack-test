@@ -1,7 +1,17 @@
-server.port= 8082
+spring:
+  application:
+    name: order-service
+  data:
+    rest:
+      basePath: /v1
+    mongodb:
+      port: 0
 
-spring.data.rest.basePath= /v1
-spring.data.mongodb.port= 0
-spring.application.name= order-service
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
 
-eureka.client.serviceUrl.defaultZone= http://localhost:8761/eureka
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
