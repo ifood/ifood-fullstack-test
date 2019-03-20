@@ -1,28 +1,31 @@
-package com.ifood.demo.order;
+package com.ifood.demo.repository;
 
+import com.ifood.demo.model.Order;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
 import org.springframework.data.rest.core.annotation.HandleAfterDelete;
 import org.springframework.data.rest.core.annotation.HandleAfterSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
 @RepositoryEventHandler(Order.class)
 public class OrderEventHandler {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(Order.class);
+
 	@HandleAfterCreate
 	public void handleOrderCreate(Order c) {
-		log.info("handleOrderCreate: {}", c.getId());
+		LOGGER.info("handleOrderCreate: {}", c.getId().toString());
 	}
 
 	@HandleAfterSave
 	public void handleOrderSave(Order c) {
-		log.info("handleOrderSave: {}", c.getId());
+		LOGGER.info("handleOrderSave: {}", c.getId().toString());
 	}
 
 	@HandleAfterDelete
 	public void handleOrderDelete(Order c) {
-		log.info("handleOrderDelete: {}", c.getId());
+		LOGGER.info("handleOrderDelete: {}", c.getId().toString());
 	}
 }

@@ -13,7 +13,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import com.ifood.demo.order.OrderEventHandler;
+import com.ifood.demo.repository.OrderEventHandler;
 
 
 @EnableSwagger2
@@ -31,7 +31,7 @@ public class OrderApplication {
     public Docket swaggerApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.ifood.demo.order.OrderController"))
+                .apis(RequestHandlerSelectors.basePackage("com.ifood.demo.controller.OrderController"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(new ApiInfoBuilder().version("1.0").title("Order API").description("Documentation Order API v1.0").build());
