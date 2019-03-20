@@ -12,7 +12,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import com.ifood.demo.client.ClientEventHandler;
+import com.ifood.demo.repository.ClientEventHandler;
 
 @EnableSwagger2
 @EnableDiscoveryClient
@@ -28,7 +28,7 @@ public class ClientApplication {
     public Docket swaggerApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.ifood.demo.client.ClientController"))
+                .apis(RequestHandlerSelectors.basePackage("com.ifood.demo.controller.ClientController"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(new ApiInfoBuilder().version("1.0").title("Client API").description("Documentation Client API v1.0").build());

@@ -1,4 +1,4 @@
-package com.ifood.demo.client;
+package com.ifood.demo.model;
 
 import java.util.UUID;
 
@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data
-@RequiredArgsConstructor
 public class Client {
 
 	private @Id @GeneratedValue UUID id;
@@ -19,7 +18,13 @@ public class Client {
 	private final String email;
 	private final String phone;
 
-	protected Client() {
-		this(null, null, null);
+	public Client(String name, String email, String phone) {
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+	}
+
+	public UUID getId() {
+		return this.id;
 	}
 }
