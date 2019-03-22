@@ -5,32 +5,37 @@ import java.util.Collection;
 import java.util.UUID;
 
 import com.ifood.demo.model.Client;
-import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.repository.Query;
+import com.ifood.demo.model.QClient;
+import com.querydsl.core.types.dsl.StringExpression;
+import com.querydsl.core.types.dsl.StringPath;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.querydsl.binding.QuerydslBindings;
+import org.springframework.data.querydsl.binding.SingleValueBinding;
+import org.springframework.data.querydsl.binding.QuerydslBindings;
+import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 
-public interface ClientRepository extends CrudRepository<Client, UUID> {
+public interface ClientRepository
+		extends CrudRepository<Client, UUID>, QuerydslPredicateExecutor<Client>,
+		QuerydslBinderCustomizer<QClient> {
+
+	@RestResource(path = "findAll")
+	Iterable<Client> findAll();
 
 	@RestResource(path = "byName")
 	Collection<Client> findByNameIgnoreCaseContaining(@Param("name") String name);
-	
+
 	@RestResource(path = "byPhone")
 	Collection<Client> findByPhoneIgnoreCaseContaining(@Param("phone") String phone);
-	
+
 	@RestResource(path = "byEmail")
 	Collection<Client> findByEmailIgnoreCaseContaining(@Param("email") String email);
 
-//	@Query(value = "Select * from Clients c" +
-//			"where (:name is null or c.name = :name) and" +
-//			"(:phone is null or c.phone = :phone) and" +
-//			"(:email is null or c.email = :email)" +
-//			"order by c.name"
-//	)
-//	Page<Client> findAllByAllCriterias(@Param("name") String name,
-//								   @Param("phone") String phone,
-//								   @Param("email") String email,
-//								   Pageable pageable);
+	@Override
+	default public void customize(QuerydslBindings bindings, QClient client) {
+		bindings.bind(String.class).first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);
+	}
 }
