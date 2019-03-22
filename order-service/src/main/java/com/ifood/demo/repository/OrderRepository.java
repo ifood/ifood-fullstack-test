@@ -24,15 +24,7 @@ public interface OrderRepository extends CrudRepository<Order, UUID> {
 	@RestResource(path = "byDate")
 	Collection<Order> findByCreatedAtBetween(@Param("start") Date start, @Param("end") Date end);
 
-//	@Query(value = "Select * from orders o" +
-//			"where (:listClientsId is null or o.clientId in :listClientsId) and" +
-//			"(:start is null or o.createdAt >= :start) and" +
-//			"(:endDate is null or o.createdAt <= :endDate)" +
-//			"order by o.createdAt"
-//	)
-//	Page<Order> findByAllCriterias(@Param("start") Date start,
-//								   @Param("end") Date endDate,
-//								   @Param("listClients") List<UUID> listClientsId,
-//								   Pageable pageable);
+	@RestResource(path = "byDateAndByClientId")
+	Collection<Order> findByCreatedAtBetweenAndClientId(@Param("start") Date start, @Param("end") Date end, @Param("client") UUID clientId);
 
 }

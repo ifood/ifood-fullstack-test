@@ -21,15 +21,45 @@ public class OrderDetailService {
     @Autowired
     ObjectMapper mapper;
 
-    public Iterable<Order> findAll() {
-        return repository.findAll();
+    public Iterable<Order> findByCreatedAtBetweenAndClientId(Date start, Date end, UUID clientId) {
+        return repository.findByCreatedAtBetweenAndClientId(start, end, clientId);
     }
+
+
+    public List<OrderDetail> findAll() {
+        Iterable<Order> orders = repository.findAll();;
+        return populateOrdersClient(orders, null);
+    }
+
 
     public List<OrderDetail> findAllOrdersBetweenDate(Date start, Date end) {
         Collection<Order> orders = repository.findByCreatedAtBetween(start, end);
+        return populateOrdersClient(orders, null);
+    }
+
+    public List<OrderDetail> findBetweenDateAndClientFiltered(Date start, Date end, String name, String phone, String email) {
+        Collection<Order> orders = repository.findByCreatedAtBetween(start, end);
+        Collection<Client> clients = clientsClient.findAllFiltered(name, email, phone);
+        return populateOrdersClient(orders, clients);
+    }
+
+    private List<OrderDetail> populateOrdersClient(Iterable<Order> orders, Collection<Client> clients) {
         List<OrderDetail> responseNode = new ArrayList<>();
+        Optional<Client> client = null;
+        //For each order
         for (Order order : orders) {
-            Optional<Client> client = clientsClient.findById(order.getClientId());
+
+            if (order.getId() != client.get().getId()) {
+                //If already query all filtered clients
+                if(clients != null) {
+                    client = clients.stream()
+                            .filter(cli -> cli.getId().equals(order.getClientId()))
+                            .findFirst();
+                } else {
+                    //Request to client microservice
+                    client = clientsClient.findById(order.getClientId());
+                }
+            }
 
             if (client.isPresent()) {
                 OrderDetail orderDetail = new OrderDetail(order.getId(),
@@ -41,5 +71,6 @@ public class OrderDetailService {
         }
 
         return responseNode;
-    }
+    };
+
 }

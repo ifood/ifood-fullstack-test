@@ -24,22 +24,12 @@ public class ClientController {
         return repository.save(client);
     }
 
-    @GetMapping("/findAll")
-    public ResponseEntity findAll() {
-        return ResponseEntity.ok(repository.findAll());
-    }
-
-    @GetMapping("/{name}")
-    public ResponseEntity<Collection<Client>> findByName(@PathVariable("name") String name) {
-        return ResponseEntity.ok(repository.findByNameIgnoreCaseContaining(name));
-    }
-
-    @GetMapping("/findFiltered")
-    public ResponseEntity findAllFiltered(
+    @GetMapping("/")
+    public Collection<Client> findAllFiltered(
             @QuerydslPredicate(root = Client.class, bindings = ClientRepository.class)
                     Predicate predicate,
             @PageableDefault(sort = {"name"}, page = 0, size = Integer.MAX_VALUE) Pageable pageable) {
-        return ResponseEntity.ok(repository.findAll(predicate, pageable).getContent());
+        return repository.findAll(predicate, pageable).getContent();
     }
 
 
