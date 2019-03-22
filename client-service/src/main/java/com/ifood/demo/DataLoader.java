@@ -18,9 +18,8 @@ public class DataLoader implements ApplicationRunner {
     }
 
     public void run(ApplicationArguments args) {
-        repository.save(new Client("Luis", "email1", "phone1"));
-        repository.save(new Client("nome3", "email2", "phone1"));
-        repository.save(new Client("nome2", "email2", "phone1"));
-        repository.save(new Client("nome4", "email2", "phone1"));
+        repository.save(new Client("David Bowye", "david@music.com", "+5527222354897"));
+        repository.save(new Client("Leroy Jenkins", "lejenkins@gmail.com", "+5581999465878"));
+        repository.save(new Client("Enzo Rodrigues", "enzinho_01@hotmail.com", "+55819999990"));
     }
 }
