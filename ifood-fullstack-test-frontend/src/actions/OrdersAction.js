@@ -10,19 +10,18 @@ import {
 import endPoints from '../api/endPoints';
 import { request } from '../api';
 import orders from './mock/orders.json'
+import { serialize } from '../utils/utils'
 
-export const getOrderList = () => {
+export const getOrderList = (params) => {
   return (dispatch) => {
     dispatch({ type: GET_ORDERS_LIST_START });
-    const endPoint = endPoints().orderList;
-    console.log("peidei")
+    const endPoint = `${endPoints().orderList}${serialize(params)}`;   
+    console.log(endPoint)
     request(endPoint)
-      .then(response => {    
-        console.log('dale'+response)
+      .then(response => {            
         dispatch({ type: GET_ORDERS_LIST_SUCCESS, payload: response.data });
       })
-      .catch(error => {  
-      console.log('dale'+error)      
+      .catch(error => {           
         dispatch({ type: GET_ORDERS_LIST_FAIL, payload: error.response })
       })
   }

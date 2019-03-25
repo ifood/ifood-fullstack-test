@@ -45,12 +45,17 @@ class FilterForm extends Component {
     });
   };
 
+  handleSubmit = event => {     
+     event.preventDefault()
+     this.props.handleSubmit(this.state)
+   }
+
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.container}>          
-        <form className={classes.container} noValidate autoComplete="off">
+        <form className={classes.container} onSubmit={this.handleSubmit} noValidate autoComplete="off">
           <Grid container spacing={24}>
             <Grid item xs='2.4'>
               <TextField
