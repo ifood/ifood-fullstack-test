@@ -26,7 +26,7 @@ public class ClientController {
         return repository.save(client);
     }
 
-    @GetMapping("v1/")
+    @GetMapping("/")
     public Collection<Client> findAllFiltered(
             @QuerydslPredicate(root = Client.class, bindings = ClientRepository.class)
                     Predicate predicate,
@@ -34,7 +34,7 @@ public class ClientController {
         return repository.findAll(predicate, pageable).getContent();
     }
 
-    @GetMapping("v1/{id}")
+    @GetMapping("/{id}")
     public Optional<Client> findById(@PathVariable("id") UUID id) {
         System.out.println("Aqui meu pirrai");
         return repository.findById(id);

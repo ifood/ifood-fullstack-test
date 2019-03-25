@@ -29,3 +29,9 @@ spring:
         - Path=/client/**
         filters:
         - RewritePath=/client/(?<path>.*), /$\{path}
+        globalcors:
+          corsConfigurations:
+            '[/**]':
+              allowedOrigins: "http://localhost:3000"
+              allowedMethods:
+              - GET

@@ -22,7 +22,7 @@ public class OrderDetailController {
     private OrderDetailService service;
 
     //Return an http response with all ordersDetails between date start and end
-    @GetMapping("v1/details/")
+    @GetMapping("/details/")
     public ResponseEntity<List<OrderDetail>> findBetweenDateAndClientFiltered(
             @RequestParam(name = "start", defaultValue  = "01-01-1999") @DateTimeFormat(pattern = "dd-MM-yyyy")Date start,
             @RequestParam(name = "end", defaultValue  = "01-01-2109") @DateTimeFormat(pattern = "dd-MM-yyyy")Date end,
@@ -37,7 +37,7 @@ public class OrderDetailController {
         return ResponseEntity.ok(service.findBetweenDateAndClientFiltered(start,end,name,phone,email));
     }
 
-    @GetMapping("v1/findAll")
+    @GetMapping("/findAll")
     public ResponseEntity findAll() {
         return ResponseEntity.ok(service.findAll());
     }
