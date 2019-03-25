@@ -24,8 +24,8 @@ public class OrderDetailController {
     //Return an http response with all ordersDetails between date start and end
     @GetMapping("/details/")
     public ResponseEntity<List<OrderDetail>> findBetweenDateAndClientFiltered(
-            @RequestParam(name = "start", defaultValue  = "01-01-1999") @DateTimeFormat(pattern = "yyyy-MM-dd")Date start,
-            @RequestParam(name = "end", defaultValue  = "01-01-2109") @DateTimeFormat(pattern = "yyyy-MM-dd")Date end,
+            @RequestParam(name = "start", defaultValue  = "1999-01-01") @DateTimeFormat(pattern = "yyyy-MM-dd")Date start,
+            @RequestParam(name = "end", defaultValue  = "2109-01-01") @DateTimeFormat(pattern = "yyyy-MM-dd")Date end,
             @RequestParam(name = "name", required = false)String name,
             @RequestParam(name = "email", required = false)String email,
             @RequestParam(name = "phone", required = false)String phone) {
