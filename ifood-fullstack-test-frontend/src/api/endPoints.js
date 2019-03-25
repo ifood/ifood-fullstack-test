@@ -7,7 +7,7 @@ import store from '../store';
 
 const endPoints = () => {  
   return {
-  	orderList: '/order/findAll',
+  	orderList: '/order/details/',
   };
 };
 

@@ -15,15 +15,16 @@ export const getOrderList = () => {
   return (dispatch) => {
     dispatch({ type: GET_ORDERS_LIST_START });
     const endPoint = endPoints().orderList;
-    
-    dispatch({ type: GET_ORDERS_LIST_SUCCESS, payload: orders });
-    // request(endPoint)
-    //   .then(response => {    
-    //     dispatch({ type: GET_ORDERS_LIST_SUCCESS, payload: response.data });
-    //   })
-    //   .catch(error => {        
-    //     dispatch({ type: GET_ORDERS_LIST_FAIL, payload: error.response })
-    //   })
+    console.log("peidei")
+    request(endPoint)
+      .then(response => {    
+        console.log('dale'+response)
+        dispatch({ type: GET_ORDERS_LIST_SUCCESS, payload: response.data });
+      })
+      .catch(error => {  
+      console.log('dale'+error)      
+        dispatch({ type: GET_ORDERS_LIST_FAIL, payload: error.response })
+      })
   }
 };
 
