@@ -18,4 +18,20 @@ public class OrderDetail {
         this.createdAt = createdAt;
         this.items = items;
     }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public List<Order.Item> getItems() {
+        return items;
+    }
 }

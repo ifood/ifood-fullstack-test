@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Pageable;
 import java.util.Collection;
+import java.util.Optional;
+import java.util.UUID;
 
 
 @RestController
@@ -24,12 +26,18 @@ public class ClientController {
         return repository.save(client);
     }
 
-    @GetMapping("/")
+    @GetMapping("v1/")
     public Collection<Client> findAllFiltered(
             @QuerydslPredicate(root = Client.class, bindings = ClientRepository.class)
                     Predicate predicate,
             @PageableDefault(sort = {"name"}, page = 0, size = Integer.MAX_VALUE) Pageable pageable) {
         return repository.findAll(predicate, pageable).getContent();
+    }
+
+    @GetMapping("v1/{id}")
+    public Optional<Client> findById(@PathVariable("id") UUID id) {
+        System.out.println("Aqui meu pirrai");
+        return repository.findById(id);
     }
 
 

@@ -1,6 +1,5 @@
 package com.ifood.demo.repository;
 
-import java.awt.print.Pageable;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -11,7 +10,6 @@ import com.querydsl.core.types.dsl.StringPath;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.querydsl.binding.SingleValueBinding;
-import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

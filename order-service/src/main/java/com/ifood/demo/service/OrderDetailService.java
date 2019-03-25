@@ -33,7 +33,9 @@ public class OrderDetailService {
 
 
     public List<OrderDetail> findAllOrdersBetweenDate(Date start, Date end) {
+        System.out.println("start " +start+ "end" + end );
         Collection<Order> orders = repository.findByCreatedAtBetween(start, end);
+        System.out.println("oders " +orders );
         return populateOrdersClient(orders, null);
     }
 
@@ -45,11 +47,10 @@ public class OrderDetailService {
 
     private List<OrderDetail> populateOrdersClient(Iterable<Order> orders, Collection<Client> clients) {
         List<OrderDetail> responseNode = new ArrayList<>();
-        Optional<Client> client = null;
+        Optional<Client> client = Optional.empty();
         //For each order
         for (Order order : orders) {
-
-            if (order.getId() != client.get().getId()) {
+            if (!client.isPresent()) {
                 //If already query all filtered clients
                 if(clients != null) {
                     client = clients.stream()

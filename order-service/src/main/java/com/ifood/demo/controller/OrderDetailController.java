@@ -3,6 +3,7 @@ package com.ifood.demo.controller;
 import com.ifood.demo.model.OrderDetail;
 import com.ifood.demo.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,10 +22,10 @@ public class OrderDetailController {
     private OrderDetailService service;
 
     //Return an http response with all ordersDetails between date start and end
-    @GetMapping("/")
+    @GetMapping("v1/details/")
     public ResponseEntity<List<OrderDetail>> findBetweenDateAndClientFiltered(
-            @RequestParam("start")Date start,
-            @RequestParam("end")Date end,
+            @RequestParam(name = "start", defaultValue  = "01-01-1999") @DateTimeFormat(pattern = "dd-MM-yyyy")Date start,
+            @RequestParam(name = "end", defaultValue  = "01-01-2109") @DateTimeFormat(pattern = "dd-MM-yyyy")Date end,
             @RequestParam(name = "name", required = false)String name,
             @RequestParam(name = "email", required = false)String email,
             @RequestParam(name = "phone", required = false)String phone) {
@@ -33,10 +34,10 @@ public class OrderDetailController {
             return ResponseEntity.ok(service.findAllOrdersBetweenDate(start,end));
         }
 
-        return ResponseEntity.ok(service.findAllOrdersBetweenDate(start,end));
+        return ResponseEntity.ok(service.findBetweenDateAndClientFiltered(start,end,name,phone,email));
     }
 
-    @GetMapping("/findAll")
+    @GetMapping("v1/findAll")
     public ResponseEntity findAll() {
         return ResponseEntity.ok(service.findAll());
     }

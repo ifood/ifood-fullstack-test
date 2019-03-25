@@ -16,10 +16,10 @@ import java.util.UUID;
 @FeignClient(name = "client-service")
 public interface ClientsClient {
 
-    @GetMapping("/{id}")
+    @GetMapping("v1/{id}")
     public Optional<Client> findById(@PathVariable("id") UUID id);
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "v1/")
     public Collection<Client> findAllFiltered(@RequestParam("name") String name,
                                       @RequestParam("email") String email,
                                       @RequestParam("phone") String phone);

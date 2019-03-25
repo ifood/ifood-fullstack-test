@@ -31,7 +31,7 @@ public class Client {
         return email;
     }
 
-    public String getOrganisation() {
+    public String getPhone() {
         return phone;
     }
 

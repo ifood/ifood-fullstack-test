@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Document
@@ -19,8 +20,13 @@ public class Order {
 	private final @Id UUID id = UUID.randomUUID();
 	private final UUID clientId;
 	private final UUID restaurantId;
+
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private final Date createdAt;
-	private final Date confirmedAt;	
+
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private final Date confirmedAt;
+
 	private final List<Item> items;
 
 
@@ -28,6 +34,7 @@ public class Order {
 	@RequiredArgsConstructor
 	public static class Item {
 
+        private final @Id UUID id = UUID.randomUUID();
 		private final String description;
 		private final Integer quantity;		
 		private final Double price;
