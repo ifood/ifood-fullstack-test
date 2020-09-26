@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/pickers": "^3.2.10",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -43,12 +44,15 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.11.6",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "babel-loader": "^8.1.0",
     "husky": "^4.3.0",
     "lint-staged": "^10.4.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "react-is": "^16.13.1"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
