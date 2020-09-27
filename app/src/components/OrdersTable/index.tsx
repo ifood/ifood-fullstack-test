@@ -15,6 +15,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
 import useOrdersTable from './hooks';
+import Row from './Rows';
 
 const ROWS_PER_PAGE_OPTIONS = [10, 25, 100];
 
@@ -26,12 +27,20 @@ interface Column {
   format?: (value: number) => string;
 }
 
+export interface OrderDetails {
+  description: string;
+  quantity: number;
+  unitPrice: string;
+  total: string;
+}
+
 export interface OrdersData {
   date: string;
   clientName: string;
   phone: string;
   email: string;
   totalValue: string;
+  details: OrderDetails[];
 }
 
 export const toCurrencyText = (value: number): string =>
@@ -97,23 +106,10 @@ const OrdersTable = <T extends Array<OrdersData>>({
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         .map((row) => {
           return (
-            <TableRow
-              hover
-              role="checkbox"
-              tabIndex={-1}
+            <Row
               key={`${row.date}${row.clientName}${row.phone}${row.email}${row.totalValue}`}
-            >
-              {columns.map((column) => {
-                const value = row[column.id];
-                return (
-                  <TableCell key={column.id} align={column.align}>
-                    {column.format && typeof value === 'number'
-                      ? column.format(value)
-                      : value}
-                  </TableCell>
-                );
-              })}
-            </TableRow>
+              row={row}
+            />
           );
         }),
     [rows, rowsPerPage, page],
@@ -122,9 +118,12 @@ const OrdersTable = <T extends Array<OrdersData>>({
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table stickyHeader aria-label="collapsible table">
           <TableHead>
-            <TableRow>{TableHeadElement}</TableRow>
+            <TableRow>
+              <TableCell />
+              {TableHeadElement}
+            </TableRow>
           </TableHead>
           <TableBody>{TableRowsElements}</TableBody>
         </Table>
