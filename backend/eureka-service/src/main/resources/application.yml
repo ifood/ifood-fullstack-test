@@ -1,0 +1,8 @@
+
+server:
+  port: 8762
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false

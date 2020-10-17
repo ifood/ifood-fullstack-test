@@ -1,0 +1,45 @@
+{
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "extends": "airbnb",
+    "overrides": [
+        {
+          "files": ["test/*.js"],
+          "rules": {
+            "require-jsdoc": "off"
+          }
+        }
+      ],
+    "rules": {
+        "indent": [0, "tab"],
+        "react/jsx-indent": 0,
+        "react/jsx-curly-newline": 0,
+        "react/jsx-filename-extension": 0,
+        "react/forbid-prop-types": 0,
+        "react/destructuring-assignment": 0,
+        "react/require-default-props": 0,
+        "react/no-array-index-key": 0,
+        "no-tabs": 0,
+        "react/jsx-props-no-spreading": 0,
+        "no-mixed-spaces-and-tabs": 0,
+        "import/no-named-as-default": 0,
+        "jsx-a11y/media-has-caption": 0,
+        "jsx-a11y/no-noninteractive-element-interactions": 0,
+        "jsx-a11y/click-events-have-key-events": 0,
+        "object-curly-newline": 0,
+        "linebreak-style": 0,
+        "no-debugger": 0,
+        "max-len": [2, 150, 2, {
+            "ignorePattern": "^import\\s.+\\sfrom\\s.+;$",
+            "ignoreUrls": true
+        }]
+    }
+}

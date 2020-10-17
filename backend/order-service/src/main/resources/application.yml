@@ -1,0 +1,16 @@
+server:
+  port: 8082
+
+spring:
+  data:
+    mongodb:
+      port: 0
+  application:
+    name: 'order-service'
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8762/eureka
