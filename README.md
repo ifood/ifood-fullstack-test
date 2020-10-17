@@ -1,5 +1,5 @@
 ## Demo
-![enter image description here](https://github.com/tresende/ifood-fullstack-test-1/blob/master/docs/demo.gif?raw=true)
+![enter image description here](https://github.com/tresende/ifood-fullstack-test/blob/master/docs/demo.gif?raw=true)
 
 ### features
 
@@ -10,7 +10,7 @@
 
 ## Architecture
 
-![enter image description here](https://raw.githubusercontent.com/tresende/ifood-fullstack-test-1/master/docs/demo.png)
+![enter image description here](https://raw.githubusercontent.com/tresende/ifood-fullstack-test/master/docs/demo.png)
 
 ## Setup 
 
