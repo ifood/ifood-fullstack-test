@@ -10,7 +10,7 @@
 
 ## Architecture
 
-![enter image description here](https://raw.githubusercontent.com/tresende/ifood-fullstack-test/master/docs/demo.png)
+![enter image description here](https://raw.githubusercontent.com/tresende/ifood-fullstack-test/master/docs/hld_demo.png)
 
 ## Setup 
 
