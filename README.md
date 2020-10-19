@@ -13,6 +13,7 @@
 ![enter image description here](https://raw.githubusercontent.com/tresende/ifood-fullstack-test/master/docs/hld_demo.png)
 
 ## Setup 
-
+ 
+ - Install node 12
  - Run MVN in services folder
  - Run NPM Install && NPM Run in frontend folder
