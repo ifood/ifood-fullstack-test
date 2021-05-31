@@ -1,0 +1,81 @@
+version: "3.3"
+services:
+  service-discovery:
+    container_name: service-discovery
+    build:
+      context: ./service-discovery
+      dockerfile: Dockerfile
+    expose:
+      - 8671
+    networks:
+      - backend
+    environment:
+      EUREKA_HOSTNAME: service-discovery
+
+  api-gateway:
+    container_name: api-gateway
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    expose:
+      - 8008
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      - service-discovery
+    environment:
+      EUREKA_URI: http://service-discovery:8761/eureka
+
+  client-service:
+    container_name: client-service
+    build:
+      context: ./client-service
+      dockerfile: Dockerfile
+    expose:
+      - 8081
+    networks:
+      - backend
+    depends_on:
+      - api-gateway
+    environment:
+      EUREKA_URI: http://service-discovery:8761/eureka
+
+  order-service:
+    container_name: order-service
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    expose:
+      - 8082
+    networks:
+      - backend
+    depends_on:
+      - api-gateway
+    environment:
+      EUREKA_URI: http://service-discovery:8761/eureka
+      FEIGN_CLIENT-SERVICE_URL: http://client-service:8081
+
+  frontend-app:
+    container_name: frontend-app
+    build:
+      context: ./frontend-app
+      dockerfile: Dockerfile
+      args:
+        - IP_ADDR=10.6.0.99
+    expose:
+      - 80
+    networks:
+      frontend:
+        ipv4_address: 10.6.0.99
+    depends_on:
+      - api-gateway
+
+networks:
+  backend:
+    driver: bridge
+  frontend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.6.0.0/16

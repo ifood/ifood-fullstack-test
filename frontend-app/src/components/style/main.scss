@@ -1,0 +1,80 @@
+.order-details {
+    h3 {
+        margin: 30px 0 5px 20px;
+    }
+
+    .order-search {
+        padding: 20px;
+
+        .search-fields {
+            align-self: center ;
+
+            .page {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+
+                .field {
+                    margin: 12px;
+                }
+            }
+        }
+
+        .search-submit {
+            margin: 20px 0px 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .search-results {    
+        thead {
+                th {
+                    font-weight: bold;
+                    font-size: 1rem;
+                    color: rgba(4, 4, 4, 0.65);
+                }
+            }
+    
+        tbody {
+            > tr {
+                &:nth-child(even) {
+                    background-color: rgba(202, 199, 199, 0.58);
+                }
+                &:nth-child(odd) {
+                    background-color: rgba(241, 239, 239, 0.58);
+                }
+                &:hover {
+                    background-color: rgba(167, 164, 164, 0.58);
+                }
+            }
+        }
+    }
+}
+
+.items-dialog {
+    thead {
+            th {
+                font-weight: bold;
+                font-size: 1rem;
+                color: rgba(4, 4, 4, 0.65);
+            }
+        }
+
+    tbody {
+        > tr {
+            &:nth-child(even) {
+                background-color: rgba(202, 199, 199, 0.58);
+            }
+            &:nth-child(odd) {
+                background-color: rgba(241, 239, 239, 0.58);
+            }
+            &:hover {
+                background-color: rgba(167, 164, 164, 0.58);
+            }
+        }
+    }
+}

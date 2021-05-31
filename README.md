@@ -44,3 +44,35 @@ As this web application will be a worldwide success, it must be prepared to be f
 In other words, each micro-service will constantly reiceive a POST requests 
 (let's say 2/sec for client and 50/sec for order) and your web application will have a lots of users 
 active simultaneously (about ~1k).
+
+## Action Plan
+- [x] Created a discovery service 
+- [x] Created an API Gateway
+- [x] Use Feing to access user service data from order service
+- [ ] Add Circuit Breaker to the order details controller
+- [x] Implement the controller logic to the order details endpoint
+- [x] Add ControllerAdvice or Exception Manager to error flows
+- [x] Implement the repository to allow queriable search
+- [x] Unit Test the whole thing
+- [x] Initialize FE project
+- [x] Create top filters component
+- [x] Create table component
+- [x] Create modal component
+- [ ] *Optional* - Add Swagger
+- [ ] *Optional* - Integration tests
+- [ ] *Optional* - Cloud configuration
+
+## Solution arquitecture
+The arquitecture marked as a _?_ is divided into 3 parts:
+1. An Api Gateway
+2. Service discovery
+3. Frontend application
+
+### Service discovery (Eureka)
+It allows several instances of any microservice to be managed use a common address. It will allow load balancing a service
+
+### Api Gateway
+It provides a unique entry point for the microservices. It routes all the incoming requests comming from the Frontend App to the corresponding services
+
+### Frontend Application
+Was implemented using React with Redux and redux-thunk as a middleware. The UI was enhanced using material-ui and Sass

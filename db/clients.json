@@ -1,0 +1,20 @@
+[
+  {
+    "id": "62ba6563-269b-449e-a35a-97d16766e6a7",
+    "name": "Luana",
+    "email": "l@l.com",
+    "phone": "123000"
+  },
+  {
+    "id": "31d5965f-7801-47e6-bd2f-ba5661d3b2c9",
+    "name": "Camila",
+    "email": "c@c.com",
+    "phone": "123123"
+  },
+  {
+    "id": "196bb6b0-df8f-4d4b-a64d-f45e8a9f4e3a",
+    "name": "Paty",
+    "email": "p@p.com",
+    "phone": "321123"
+  }
+]
